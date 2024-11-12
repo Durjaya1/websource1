@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankit's Skills | Portfolio</title>
+    <link rel="icon" type="image/png" href="A.png" sizes="28x28">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e5e6ff, rgb(0, 0, 189));
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            padding-top: 100px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 40px;
+            background: rgb(5, 0, 60);
+            border-radius: 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: width 0.5s ease, justify-content 0.5s ease;
+            overflow: hidden;
+        }
+
+        .navbar:hover {
+            width: 350px;
+            background: rgb(14, 0, 85);
+            color: rgb(205, 240, 255);
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            margin-left: 20px;
+            transition: opacity 0.3s ease;
+        }
+
+        .navbar:hover a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .navbar a:hover {
+            color: rgb(187, 255, 255);
+        }
+
+        .intro {
+            color: white;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 0px 1.5px rgba(0, 0, 0, 1);
+        }
+
+        .skills {
+            width: 80%;
+            max-width: 600px;
+            background: linear-gradient(125deg, #8d98fc, rgb(172, 172, 249));
+            border-radius: 10px;
+            padding: 20px; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .skills:hover{
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: transform 1s ease;
+        }
+
+        .skill {
+            margin: 15px 0;
+        }
+
+        .skill h3 {
+            display: flex;
+            justify-content: space-between;
+            margin: 0;
+        }
+
+        .bar {
+            background: #ddd;
+            border-radius: 5px;
+            height: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .fill {
+            background: blue;
+            height: 100%;
+            transition: width 1s ease-in-out;
+        }
+
+        .fill {
+            width: 0;
+            animation: fillAnimation 1s forwards;
+        }
+
+        @keyframes fillAnimation {
+            from {
+                width: 0;
+            }
+            to {
+                width: var(--skill-level);
+            }
+        }
+
+        @keyframes slide {
+            0% { opacity: 0; transform: translateY(60px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href='/'>
+            <span>Home</span>
+        </a>
+        <a href='/skills.html'>
+            <span>Skills</span>
+        </a>
+        <a href='/projects.html'>
+            <span>Projects</span>
+        </a>
+        <a href='/contact.html'>
+            <span>Contact</span>
+        </a>
+    </div>
+
+    <div class="intro">
+        <h1>My Skills</h1>
+        <p>This is <strong>Ankit</strong>. As you guys know, I'm a web developer and a Minecraft developer. Here’s a visual representation of my skills:</p>
+    </div>
+
+    <section class="skills">
+        <div class="skill" style="--skill-level: 90%;">
+            <h3>HTML <span>90%</span></h3>
+            <div class="bar">
+                <div class="fill" style="width: var(--skill-level);"></div>
+            </div>
+        </div>
+
+        <div class="skill" style="--skill-level: 80%;">
+            <h3>CSS <span>80%</span></h3>
+            <div class="bar">
+                <div class="fill" style="width: var(--skill-level);"></div>
+            </div>
+        </div>
+
+        <div class="skill" style="--skill-level: 65%;">
+            <h3>JavaScript <span>65%</span></h3>
+            <div class="bar">
+                <div class="fill" style="width: var(--skill-level);"></div>
+            </div>
+        </div>
+
+        <div class="skill" style="--skill-level: 85%;">
+            <h3>MC development <span>85%</span></h3>
+            <div class="bar">
+                <div class="fill" style="width: var(--skill-level);"></div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

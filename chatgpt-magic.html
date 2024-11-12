@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Hill Climb Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #87CEEB;
+        }
+        canvas {
+            display: block;
+            margin: auto;
+            background: #d9d9d9;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Vehicle settings
+const vehicle = {
+    x: 100,
+    y: 300,
+    width: 40,
+    height: 20,
+    speed: 0,
+    gravity: 0.5,
+    acceleration: 0.2,
+    maxSpeed: 5,
+    jumpForce: -8
+};
+
+// Terrain
+const terrain = [];
+const terrainHeight = 200;
+
+for (let i = 0; i < canvas.width; i += 20) {
+    terrain.push({
+        x: i,
+        y: Math.random() * terrainHeight + 200
+    });
+}
+
+let keys = {};
+
+window.addEventListener('keydown', (e) => {
+    keys[e.code] = true;
+});
+window.addEventListener('keyup', (e) => {
+    keys[e.code] = false;
+});
+
+function update() {
+    // Gravity effect
+    vehicle.speed += vehicle.gravity;
+    
+    if (keys['ArrowRight']) {
+        vehicle.speed += vehicle.acceleration;
+    }
+    if (keys['ArrowLeft']) {
+        vehicle.speed -= vehicle.acceleration;
+    }
+    if (keys['Space'] && vehicle.y === terrain[Math.floor(vehicle.x / 20)].y) {
+        vehicle.speed += vehicle.jumpForce;
+    }
+
+    // Cap speed
+    if (vehicle.speed > vehicle.maxSpeed) {
+        vehicle.speed = vehicle.maxSpeed;
+    } else if (vehicle.speed < -vehicle.maxSpeed) {
+        vehicle.speed = -vehicle.maxSpeed;
+    }
+
+    // Update position
+    vehicle.y += vehicle.speed;
+
+    // Check collision with terrain
+    const currentTerrain = terrain[Math.floor(vehicle.x / 20)];
+    if (currentTerrain) {
+        if (vehicle.y + vehicle.height > currentTerrain.y) {
+            vehicle.y = currentTerrain.y - vehicle.height; // Reset vehicle position
+            vehicle.speed = 0; // Stop falling
+        }
+    }
+
+    vehicle.x += vehicle.speed;
+    if (vehicle.x > canvas.width) {
+        vehicle.x = 0; // Reset position
+    } else if (vehicle.x < 0) {
+        vehicle.x = canvas.width; // Reset position
+    }
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw terrain
+    ctx.fillStyle = "#8B4513"; // Brown color
+    for (const point of terrain) {
+        ctx.fillRect(point.x, point.y, 20, canvas.height - point.y);
+    }
+
+    // Draw vehicle
+    ctx.fillStyle = "#FF0000"; // Red color
+    ctx.fillRect(vehicle.x, vehicle.y, vehicle.width, vehicle.height);
+}
+
+function gameLoop() {
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+
+// Start the game loop
+gameLoop();
+
+    </script>
+</body>
+</html>
